@@ -1,3 +1,8 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
+
 pipeline {
     agent any
     stages {
@@ -8,8 +13,11 @@ pipeline {
         }
         stage('Slack it!') {
             steps {
-                echo "---Testing Sending Slack Message---"
-                slackSend channel: '#jenkins', message: 'Hello There!'
+                script{
+                    echo "---Dig into slack script---"
+                    mainJenkinsFile = load "helpers/slack.groovy"
+                    mainJenkinsFile.runJob()                   
+                }
             }
         }
     }
