@@ -6,5 +6,11 @@ pipeline {
                 echo "---Testing---"
             }
         }
+        stage('Slack it!') {
+            steps {
+                echo "---Testing Sending Slack Message---"
+                slackSend channel: '#jenkins', message: 'Hello There!'
+            }
+        }
     }
 }
